@@ -3,11 +3,11 @@ import Navbar from "../components/Navbar";
 import {useSelector} from "react-redux";
 import {auth} from "../firebase/firebase"
 import { signOut } from "firebase/auth"
+import Plan from "../components/Plan";
 
 
 const Profile = () => {
     const user = useSelector(state => state.user.user)
-
 
 
     return (
@@ -22,6 +22,7 @@ const Profile = () => {
                         <h2>{user.email}</h2>
                         <div className="profile_plans">
                             <h3>Plans</h3>
+                            <Plan />
                             <button className='profile_signOut' onClick={() => signOut(auth)}>Sign Out</button>
                         </div>
                     </div>

@@ -13,7 +13,7 @@ const Plan = () => {
     useEffect(async () => {
         const allDocs = await getDocs(query(collection(db, `customers/${user.uid}/subscriptions`)))
         allDocs.forEach(doc => setSubscription({
-            role: doc.data().role,
+            role: doc.data().role ? doc.data().role : null,
             current_period_end: doc.data().current_period_end.seconds,
             current_period_start: doc.data().current_period_start.seconds
         }))
@@ -100,7 +100,7 @@ const Plan = () => {
             {
                 // 因为products是一个对象，不能直接使用map，需要使用下面这种方式
                 Object.entries(products).map( ([productId, productData]) => {
-                    const isCurrentPackage = productData.name?.toLowerCase().includes(subscription.role)
+                    const isCurrentPackage = productData.name?.toLowerCase().includes(subscription?.role)
 
                     return (
                         <div className={`${isCurrentPackage && 'plan_plan_disable'} plan_plan`} key={productId}>
